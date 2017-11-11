@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 public class StarObject
 {
@@ -7,9 +8,9 @@ public class StarObject
     private double dec;
     private double mag;
     private string spectra;
-
+    private double radius;
     private double inAlt;
-
+    private Color color;
     // constructor of StarObject
     public StarObject(int id1, double ra1, double dec1, double mag1, string spectra1)
     {
@@ -21,7 +22,7 @@ public class StarObject
     }
 
     // method calculates alt and az initially
-    public double[] azAlt(double longitude, int hour, int minutes, int seconds, int z, int day, int month, int year)
+    /*public double[] azAlt(double longitude, int hour, int minutes, int seconds, int z, int day, int month, int year)
     {
         // This calculates local sidereal hours
         double decHour = hour + minutes / 60.0 + seconds / 3600.0;
@@ -45,10 +46,72 @@ public class StarObject
 
         double[] hAz = { az, h };
         return hAz;
+    }*/
+
+    public void getColor(spectra)
+    {
+        char c = spectra.ToCharArray()[0];
+        if (c == 'O')
+        {
+            color.setColor(48, 115, 221);
+
+        }
+        else if (c == 'B')
+        {
+            color.setColor(88, 139, 221);
+        }
+        else if (c == 'A')
+        {
+            color.setColor(169, 192, 229);
+        }
+        else if (c == 'F')
+        {
+            color.setColor(218, 227, 242);
+        }
+        else if (c == 'G')
+        {
+            color.setColor(234, 170, 255);
+        }
+        else if (c == 'K')
+        {
+            color.setColor(232, 123, 64);
+        }
+        else if (c == 'M')
+        {
+            color.setColor(232, 19, 11);
+        }
+    }
+    public void starRad()
+    {
+        double n; // smallest radius
+        radius = n * (1 - (mag + 5) / 25);
+    }
+
+    public double[] cart(double sid, double latitude)
+    {
+        // theta, sidereal time itself is constant for all stars
+        // keep in mind that this sid differs star to star, so it must have more similarity to hour angle
+        // so actually, each sid second is a real second, so increment initial sidereal time by 1 for each second
+        double hourAngle = sid - ra;
+        double a2 = cos(90 - latitude);
+        double a3 = sin(90 - latitude);
+
+        double c2 = cos(latitude);
+        double c3 = sin(latitude);
+
+        double rho = 1.0;
+        double r = rho * sin(toRadians(90 - dec));
+        double x = r * sin(hourAngle);
+        double y = c2 + r * cos(hourAngle) * a2;
+        double z = c3 + r * cos(hourAngle) * a3;
+
+        double[] xyz = { x, y, z };
+
+        return xyz;
     }
 
     public static void main(string[] args)
-    {
+    { 
         print("Hello");
     }
 
