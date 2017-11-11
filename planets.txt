@@ -1,0 +1,21 @@
+def spherical(delta, alpha, varphi, theta):
+    """"
+    Calculates azimuth and altitude of star given declination (delta), right ascension(alpha), observer latitude on Earth (varphi)
+    and local sideral time (theta)
+    """
+    from math import *
+    
+    H=theta-alpha #in degrees
+    
+    h=asin(sin(radians(delta))*sin(radians(varphi))+cos(radians(delta))*cos(radians(varphi))*cos(radians(H))
+           
+    A = pi+atan(sin(radians(H)) / (sin(radians(varphi))*cos(radians(H))-tan(radians(delta))*cos(radians(varphi)) ))
+    
+    A_h=[]
+    A_h.append(A)
+    A_h.append(h)
+    
+    return A_h
+    
+    
+    
