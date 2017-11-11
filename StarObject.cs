@@ -3,14 +3,12 @@ using System.Drawing;
 
 public class StarObject
 {
-    private int id;
-    private double ra;
-    private double dec;
-    private double mag;
-    private string spectra;
-    private double radius;
-    private double inAlt;
-    private Color color;
+    private int id; // id number
+    private double ra; // right ascension coordinate
+    private double dec; // declination coordinate
+    private double mag; // apparent magnitude 
+    private string spectra; // Stellar classification
+    
     // constructor of StarObject
     public StarObject(int id1, double ra1, double dec1, double mag1, string spectra1)
     {
@@ -21,6 +19,7 @@ public class StarObject
         spectra = spectra1;
     }
 
+    // This commented out method is not used. I have not deleted it yet just in case we need to use its code later
     // method calculates alt and az initially
     /*public double[] azAlt(double longitude, int hour, int minutes, int seconds, int z, int day, int month, int year)
     {
@@ -48,45 +47,52 @@ public class StarObject
         return hAz;
     }*/
 
-    public void getColor(spectra)
+    // Based on the first letter of the stellar classification, this method returns a color for the star
+    public Color getColor(string spectra)
     {
-        char c = spectra.ToCharArray()[0];
+        Color color;
+    char c = spectra.ToCharArray()[0];
         if (c == 'O')
         {
-            color.setColor(48, 115, 221);
+            return color.setColor(48, 115, 221);
 
         }
         else if (c == 'B')
         {
-            color.setColor(88, 139, 221);
+            return color.setColor(88, 139, 221);
         }
         else if (c == 'A')
         {
-            color.setColor(169, 192, 229);
+            return color.setColor(169, 192, 229);
         }
         else if (c == 'F')
         {
-            color.setColor(218, 227, 242);
+            return color.setColor(218, 227, 242);
         }
         else if (c == 'G')
         {
-            color.setColor(234, 170, 255);
+            return color.setColor(234, 170, 255);
         }
         else if (c == 'K')
         {
-            color.setColor(232, 123, 64);
+            return color.setColor(232, 123, 64);
         }
         else if (c == 'M')
         {
-            color.setColor(232, 19, 11);
+            return color.setColor(232, 19, 11);
         }
     }
-    public void starRad()
+
+    // Based on the star's magnitude, the star returns a radius for the star in the sky.
+    // For now I've set n = 1, but it should be eventually set to the smallest radius
+    public double starRad()
     {
-        double n; // smallest radius
-        radius = n * (1 - (mag + 5) / 25);
+        double n = 1; // smallest radius
+        return n * (1 - (mag + 5) / 25);
     }
 
+    // Given the sidereal time (calculated in the main class, Planetarium) and the latitude of the observor, this method calculates the xyz position
+    // of the star and returns it.
     public double[] cart(double sid, double latitude)
     {
         // theta, sidereal time itself is constant for all stars
@@ -110,6 +116,7 @@ public class StarObject
         return xyz;
     }
 
+    // Main method
     public static void main(string[] args)
     { 
         print("Hello");

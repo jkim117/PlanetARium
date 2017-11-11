@@ -3,9 +3,15 @@
 public class Planetarium
 {
     private string[] stars = new string[6001]; // testing first 1000 stars
-	static void Main()
-	{
-        //These will be inputs eventually
+    // This file should be able to read the txt star data file
+    // https://raw.githubusercontent.com/CelestiaProject/Celestia/VS2013-x86-x64/catalogs/stars.txt
+    // And create an array of starObjects (maybe first couple thousand brightest)
+    // Remember for each line in the txt file, the first number is the id, the third is the declination, the 4th is right ascension,
+    // 5th is magnitude, and 6th is the stellar classification
+    static void Main()
+	
+        //Find a way to get these values, from user input/ timestap of the computer. z refers to the positive or negative shift from UT time (time zone) make sure to
+        // take daylights savings into account.
         double longitude;
         int hour;
         int minutes;
@@ -14,7 +20,7 @@ public class Planetarium
         int day;
         int month;
         int year;
-        // This calculates local sidereal hours
+        // This calculates local sidereal hours (to be inputted into StarObject.cart())
         double decHour = hour + minutes / 60.0 + seconds / 3600.0;
         double jDay = 367 * year - (int)(7 * (year + (int)((month + 9) / 12)) / 4) + (int)(275 * month / 9) + day + 1721013.5;
         double jCenturies = (jDay - 2451545.0) / 36525;
@@ -30,5 +36,6 @@ public class Planetarium
         double localSidHours = locSidRaw;
     }
 
+//based on the sideral hours (this is re-calcualted for every time step), update the positions of the starObjects using the .cart() method. Make the ar environment reflect this change.
    
 }
