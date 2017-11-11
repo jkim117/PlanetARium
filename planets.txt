@@ -7,7 +7,7 @@ def spherical(delta, alpha, varphi, theta):
     
     H=theta-alpha #in degrees
     
-    h=asin(sin(radians(delta))*sin(radians(varphi))+cos(radians(delta))*cos(radians(varphi))*cos(radians(H))
+    h=asin(sin(radians(delta))*sin(radians(varphi))+cos(radians(delta))*cos(radians(varphi))*cos(radians(H)))
            
     A = pi+atan(sin(radians(H)) / (sin(radians(varphi))*cos(radians(H))-tan(radians(delta))*cos(radians(varphi)) ))
     
