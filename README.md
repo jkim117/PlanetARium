@@ -1,2 +1,3 @@
 # PlanetARium
-We'll see
+
+sidCalc calculates local sidereal time
