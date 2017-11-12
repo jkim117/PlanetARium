@@ -1,4 +1,4 @@
 # PlanetARium
-StarObject class is now polished up. It is a compilation of other pieces of code written. It also has been commented, so you can read what each method is supposed to do.
+StarObject class defines a class of StarObjects that hold information specific to one star like right ascension, declination, apparent magnitude, etc and also includes methods to calculate position, color, size in the sky, etc.
 
-The next class, Planetarium will be the main class and needs to read the input file, find the current time, and calcualte the stars' new positions.
+The next class, Planetarium is the main class that takes in the input file, stars.txt and creates an array of StarObjects and calculates and updates the motion of the stars in the sky as they should be moving, real time.
