@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Drawing;
+//using System.Drawing;
+using UnityEngine;
 
 public class StarObject
 {
@@ -47,6 +48,11 @@ public class StarObject
         return hAz;
     }*/
 
+    private double toRadians(double deg)
+    {
+        return Math.PI / 180 * deg;
+    }
+
     // Based on the first letter of the stellar classification, this method returns a color for the star
     public Color getColor(string spectra)
     {
@@ -54,32 +60,44 @@ public class StarObject
     char c = spectra.ToCharArray()[0];
         if (c == 'O')
         {
-            return color.setColor(48, 115, 221);
+            color = new Color(48, 115, 221, 1);
+            return color;
 
         }
         else if (c == 'B')
         {
-            return color.setColor(88, 139, 221);
+            color = new Color(88, 139, 221, 1);
+            return color;
         }
         else if (c == 'A')
         {
-            return color.setColor(169, 192, 229);
+            color = new Color(169, 192, 229, 1);
+            return color;
         }
         else if (c == 'F')
         {
-            return color.setColor(218, 227, 242);
+            color = new Color(218, 227, 242, 1);
+            return color;
         }
         else if (c == 'G')
         {
-            return color.setColor(234, 170, 255);
+            color = new Color(234, 170, 255, 1);
+            return color;
         }
         else if (c == 'K')
         {
-            return color.setColor(232, 123, 64);
+            color = new Color(232, 123, 64, 1);
+            return color;
         }
         else if (c == 'M')
         {
-            return color.setColor(232, 19, 11);
+            color = new Color(232, 19, 11, 1);
+            return color;
+        }
+        else
+        {
+            color = new Color(234, 170, 255, 1);
+            return color;
         }
     }
 
@@ -87,39 +105,39 @@ public class StarObject
     // For now I've set n = 1, but it should be eventually set to the smallest radius
     public double starRad()
     {
-        double n = 1; // smallest radius
+        double n = 10; // smallest radius
         return n * (1 - (mag + 5) / 25);
     }
 
     // Given the sidereal time (calculated in the main class, Planetarium) and the latitude of the observor, this method calculates the xyz position
     // of the star and returns it.
-    public double[] cart(double sid, double latitude)
+    public Vector3 cart(double sid, double latitude)
     {
         // theta, sidereal time itself is constant for all stars
-        // keep in mind that this sid differs star to star, so it must have more similarity to hour angle
+        // keep in mind that this oldSid (or hourAngle now) differs star to star, so it must have more similarity to hour angle
         // so actually, each sid second is a real second, so increment initial sidereal time by 1 for each second
-        double hourAngle = sid - ra;
-        double a2 = cos(90 - latitude);
-        double a3 = sin(90 - latitude);
+        double hourAngle = toRadians(sid - ra);
+        double a2 = Math.Cos(toRadians(90 - latitude));
+        double a3 = Math.Sin(toRadians(90 - latitude));
 
-        double c2 = cos(latitude);
-        double c3 = sin(latitude);
+        double c2 = Math.Cos(toRadians(latitude));
+        double c3 = Math.Sin(toRadians(latitude));
 
         double rho = 1.0;
-        double r = rho * sin(toRadians(90 - dec));
-        double x = r * sin(hourAngle);
-        double y = c2 + r * cos(hourAngle) * a2;
-        double z = c3 + r * cos(hourAngle) * a3;
+        double r = rho * Math.Sin(toRadians(90 - dec));
+        double x = r * Math.Sin(hourAngle);
+        double y = c2 + r * Math.Cos(hourAngle) * a2;
+        double z = c3 + r * Math.Cos(hourAngle) * a3;
 
-        double[] xyz = { x, y, z };
+        Vector3 v = new Vector3((float)x, (float)y, (float)z);
 
-        return xyz;
+        return v;
     }
 
     // Main method
     public static void main(string[] args)
     { 
-        print("Hello");
+        Console.WriteLine("HelloWorld");
     }
 
 }
