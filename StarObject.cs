@@ -105,7 +105,7 @@ public class StarObject
     // For now I've set n = 1, but it should be eventually set to the smallest radius
     public double starRad()
     {
-        double n = 10; // smallest radius
+        double n = 1; // smallest radius
         return n * (1 - (mag + 5) / 25);
     }
 
@@ -123,7 +123,7 @@ public class StarObject
         double c2 = Math.Cos(toRadians(latitude));
         double c3 = Math.Sin(toRadians(latitude));
 
-        double rho = 1.0;
+        double rho = 50.0;
         double r = rho * Math.Sin(toRadians(90 - dec));
         double x = r * Math.Sin(hourAngle);
         double y = c2 + r * Math.Cos(hourAngle) * a2;
